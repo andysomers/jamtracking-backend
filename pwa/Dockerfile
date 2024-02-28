@@ -74,5 +74,7 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
+ENV NODE_OPTIONS=--max_old_space_size=4096
+ENV GENERATE_SOURCEMAP=false
 
 CMD ["node", "server.js"]

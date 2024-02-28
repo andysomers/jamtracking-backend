@@ -19,6 +19,7 @@ final class Version20240227162005 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $this->skipIf($schema->getTable('skater')->hasColumn('id'), 'skip if table exists');
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE skater_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE team_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
