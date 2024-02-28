@@ -23,10 +23,6 @@ class Skater
     #[Assert\NotBlank]
     public string $name = '';
 
-    #[ORM\Column]
-    public bool $jammer = false;
-    public bool $pivot = false;
-
     #[ORM\ManyToOne(inversedBy: 'skaters')]
     public ?Team $team = null;
 
