@@ -3,30 +3,34 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * This is a dummy entity. Remove it!
- */
 #[ApiResource(mercure: true)]
 #[ORM\Entity]
-class Greeting
+class Team
 {
-    /**
-     * The entity ID
-     */
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
     private ?int $id = null;
 
-    /**
-     * A nice person
-     */
     #[ORM\Column]
     #[Assert\NotBlank]
     public string $name = '';
+
+    #[ORM\Column]
+    public string $color = '';
+
+    /** @var Skater[] Available skaters for this team. */
+    #[ORM\OneToMany(mappedBy: 'team', targetEntity: Skater::class, cascade: ['persist', 'remove'])]
+    public iterable $skaters;
+
+    public function __construct()
+    {
+        $this->skaters = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
